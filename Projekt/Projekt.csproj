@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TicTacToeLib\TicTacToeLib.csproj">
+      <Project>{ea3792bb-b938-4fd6-a412-933395a88b1a}</Project>
+      <Name>TicTacToeLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

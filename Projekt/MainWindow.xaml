@@ -5,14 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="544.149" Width="520.745">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="47*"/>
-            <ColumnDefinition Width="25*"/>
-        </Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    </Grid.RowDefinitions >
 
-        <Button Name="StartGry" Click="startGry_Click">Kliknij mnie </Button>
-        <Rectangle x:Name="Kolor" Grid.Column="1" Fill="#FFBD5050"></Rectangle>
+        <Button x:Name="Button1" Grid.Column="0" Grid.Row="0" Content="X" />
+        <Button x:Name="Button2" Grid.Column="1" Grid.Row="0" Content="X" />
+        <Button x:Name="Button3" Grid.Column="2" Grid.Row="0" Content="X" />
+        <Button x:Name="Button4" Grid.Column="0" Grid.Row="1" Content="X" />
+        <Button x:Name="Button5" Grid.Column="1" Grid.Row="1" Content="X" />
+        <Button x:Name="Button6" Grid.Column="2" Grid.Row="1" Content="X" />
+        <Button x:Name="Button7" Grid.Column="0" Grid.Row="2" Content="X" />
+        <Button x:Name="Button8" Grid.Column="1" Grid.Row="2" Content="X" />
+        <Button x:Name="Button9" Grid.Column="2" Grid.Row="2" Content="X" Click="Button9_Click" />
+
+
+
+
+        
     </Grid>
 </Window>

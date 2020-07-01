@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TicTacToeLib;
 
 namespace Projekt
 {
@@ -21,16 +22,14 @@ namespace Projekt
     public partial class MainWindow : Window
     {
         private Random random = new Random();
+
+        private Board GameBoard;
+
         public MainWindow()
         {
             InitializeComponent();
+            GameBoard = new Board(3);
 
-
-        }
-
-        private void startGry_Click(object sender, RoutedEventArgs e)
-        {
-            Kolor.Fill = new SolidColorBrush(Color.FromRgb((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255)));
         }
     }
 }
