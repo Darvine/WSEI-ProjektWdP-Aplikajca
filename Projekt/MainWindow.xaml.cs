@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TicTacToeLib;
+using TicTacToeLib.Enum;
+using TicTacToeLib.Event;
 
 namespace Projekt
 {
@@ -29,7 +20,46 @@ namespace Projekt
         {
             InitializeComponent();
             GameBoard = new Board(3);
+            GameBoard.OnSlotValueChange += OnBoardPlaceValueChange;
+            GameBoard.OnStateChange += OnGameStateChange;
+        }
 
+        private void BoardPlace_Click(object sender, RoutedEventArgs e)
+        {
+            int x = (int)(sender as FrameworkElement).GetValue(Grid.ColumnProperty);
+            int y = (int)(sender as FrameworkElement).GetValue(Grid.RowProperty);
+
+            GameBoard.SetSlotValue(x, y, BoardSlotValues.CROSS);
+        }
+
+        private void OnBoardPlaceValueChange(object sender, SlotValueChangedEventArgs e)
+        {
+            GetBoardPlace(e.x, e.y).SetValue(Button.ContentProperty, Translator.BoardSlotValues[e.value]);
+        }
+
+        private void OnGameStateChange(object sender, EventArgs e)
+        {
+            if (GameBoard.State != GameStates.InProgress)
+                MessageBox.Show(Translator.GameStates[GameBoard.State]);
+        }
+
+        private FrameworkElement GetBoardPlace(int x, int y)
+        {
+            foreach (FrameworkElement el in GameArea.Children)
+            {
+                int cx = (int)el.GetValue(Grid.ColumnProperty);
+                int cy = (int)el.GetValue(Grid.RowProperty);
+
+                if (cx == x && cy == y)
+                    return el;
+            }
+
+            throw new Exception("Board place not found");
+        }
+
+        private void RestartGame_Click(object sender, RoutedEventArgs e)
+        {
+            GameBoard.Clear();
         }
     }
 }
