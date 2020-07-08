@@ -16,12 +16,27 @@
         </Style>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="6*"></RowDefinition>
-            
+
         </Grid.RowDefinitions>
-        <Button Content="Game Restart" Click="RestartGame_Click"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Game Restart" Click="RestartGame_Click"/>
+            <StackPanel Grid.Column="1">
+                <TextBlock Grid.Column="1" Foreground="DarkGreen" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18">Wygrana  0</TextBlock>
+                <TextBlock Grid.Column="1" Foreground="DarkRed" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18"> Przegrana  0</TextBlock>
+                <TextBlock Grid.Column="1" Foreground="DarkSlateBlue" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18">Remis  0</TextBlock>
+            </StackPanel>
+        </Grid>
         <Grid Name="GameArea" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

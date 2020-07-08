@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
+using TicTacToeLib.AI;
 using TicTacToeLib.Enum;
 using TicTacToeLib.Event;
 
@@ -8,7 +10,7 @@ namespace TicTacToeLib
 {
     public class Board
     {
-        private int Size;
+        public int Size { get; private set; }
         private GameStates _state;
         public GameStates State
         {
@@ -20,21 +22,37 @@ namespace TicTacToeLib
             }
         }
 
-        private BoardSlotValues PlayerValue = BoardSlotValues.CROSS;
+        private MoveGenerators ActiveGenerator = MoveGenerators.MiniMax;
+
+        private Dictionary<MoveGenerators, IMoveGenerator> Generators = new Dictionary<MoveGenerators, IMoveGenerator>()
+        {
+            { MoveGenerators.Random, new RandomMoveGenerator() },
+            { MoveGenerators.MiniMax, new MiniMaxMoveGenerator() }
+        };
+
+        public BoardSlotValues PlayerValue = BoardSlotValues.CROSS;
+        public BoardSlotValues AIValue = BoardSlotValues.CICRLE;
 
         public event EventHandler<SlotValueChangedEventArgs> OnSlotValueChange;
         public event EventHandler<EventArgs> OnStateChange;
-        private List<BoardSlotValues> Slots = new List<BoardSlotValues>();
+        private List<BoardSlotValues> _slots = new List<BoardSlotValues>();
+        public List<BoardSlotValues> Slots
+        {
+            get => _slots;
+            private set
+            {
+                _slots = value;
+            }
+        }
 
         public Board(int size)
         {
             Size = size;
-            State = GameStates.InProgress;
             Init();
         }
 
         private void Init(bool propagateChange = false)
-        {
+        {   
             for (int y = 0; y < Size; y++)
             {
                 for (int x = 0; x < Size; x++)
@@ -44,6 +62,7 @@ namespace TicTacToeLib
                         OnSlotValueChanged(new SlotValueChangedEventArgs() { x = x, y = y, value = BoardSlotValues.NONE });
                 }
             }
+            State = GameStates.InProgress;
         }
 
         public void Clear()
@@ -59,11 +78,20 @@ namespace TicTacToeLib
 
         public void SetSlotValue(int x, int y, BoardSlotValues value)
         {
+            if (Slots[y * Size + x] != BoardSlotValues.NONE)
+                throw new InvalidOperationException();
+
             Slots[y * Size + x] = value;
             OnSlotValueChanged(new SlotValueChangedEventArgs() { x = x, y = y, value = value });
 
             CheckIsWon(x, y, value);
             CheckGameEnded();
+
+            if (State == GameStates.InProgress && value == PlayerValue)
+            {
+                Point point = Generators[ActiveGenerator].Generate(this);
+                SetSlotValue(point.X, point.Y, PlayerValue == BoardSlotValues.CROSS ? BoardSlotValues.CICRLE : BoardSlotValues.CROSS);
+            }
         }
 
         public void CheckGameEnded()
