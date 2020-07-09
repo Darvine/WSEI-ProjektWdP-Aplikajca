@@ -101,5 +101,16 @@ namespace Projekt
                 el.IsEnabled = true;
             }
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (GameBoard == null)
+                return;
+
+            if (AILevel.SelectedIndex == 0)
+                GameBoard.ActiveGenerator = MoveGenerators.Random;
+            else if (AILevel.SelectedIndex == 1)
+                GameBoard.ActiveGenerator = MoveGenerators.MiniMax;
+        }
     }
 }

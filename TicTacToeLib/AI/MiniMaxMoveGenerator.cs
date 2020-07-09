@@ -43,7 +43,7 @@ namespace TicTacToeLib.AI
 
                 if (playerType == board.AIValue && score[2] > bestMove[2])
                     bestMove = score;
-                else if(score[2] < bestMove[2])
+                else if(playerType == board.PlayerValue && score[2] < bestMove[2])
                     bestMove = score;
             }
 

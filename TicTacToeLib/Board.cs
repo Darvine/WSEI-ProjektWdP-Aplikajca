@@ -22,7 +22,7 @@ namespace TicTacToeLib
             }
         }
 
-        private MoveGenerators ActiveGenerator = MoveGenerators.MiniMax;
+        public MoveGenerators ActiveGenerator = MoveGenerators.Random;
 
         private Dictionary<MoveGenerators, IMoveGenerator> Generators = new Dictionary<MoveGenerators, IMoveGenerator>()
         {

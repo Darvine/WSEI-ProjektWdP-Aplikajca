@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TicTacToeLib.Enum
 {
-    enum MoveGenerators
+    public enum MoveGenerators
     {
         Random = 0,
         MiniMax

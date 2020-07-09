@@ -36,8 +36,17 @@
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
 
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                
                 <Button Content="Restart" Click="RestartGame_Click" Foreground="White" Background="#ED000000" FontFamily="Arial Black" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <StackPanel Grid.Column="1">
+                <ComboBox Name="AILevel" Grid.Row="1" SelectedIndex="0" Height="24" SelectionChanged="ComboBox_SelectionChanged">
+                    <ComboBoxItem>Łatwy</ComboBoxItem>
+                    <ComboBoxItem>Trudny</ComboBoxItem>
+                </ComboBox>
+                <StackPanel Grid.Column="1" Grid.RowSpan="2">
                     <TextBlock Grid.Column="1" Foreground="DarkGreen" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18" Name="ScoreWin"></TextBlock>
                     <TextBlock Grid.Column="1" Foreground="DarkRed" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18" Name="ScoreDefeat"></TextBlock>
                     <TextBlock Grid.Column="1" Foreground="DarkSlateBlue" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18" Name="ScoreDraw"></TextBlock>
