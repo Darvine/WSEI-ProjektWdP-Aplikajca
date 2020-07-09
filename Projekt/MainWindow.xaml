@@ -8,55 +8,62 @@
         Title="MainWindow" Height="544.149" Width="520.745">
     <Window.Resources>
         <Style x:Key="TicTacPlace" TargetType="Button">
-            <Setter Property="Background" Value="Azure"/>
-            <Setter Property="BorderThickness" Value="0.4"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="FontSize" Value="80"/>
 
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="6*"></RowDefinition>
-
-        </Grid.RowDefinitions>
+        <Grid Panel.ZIndex="1000">
+            <TextBlock Foreground="White" Panel.ZIndex="-2" VerticalAlignment="Center" Background="#FF05781A" Padding="60,40" FontFamily="Arial Black" FontSize="36" HorizontalAlignment="Center" Visibility="Hidden" Name="InfoWin">WYGRAŁEŚ!</TextBlock>
+            <TextBlock Foreground="White" Panel.ZIndex="-2" VerticalAlignment="Center" Background="#FFB41515" Padding="60,40" FontFamily="Arial Black" FontSize="36" HorizontalAlignment="Center" Visibility="Hidden" Name="InfoDefeat">PRZEGRAŁEŚ!</TextBlock>
+            <TextBlock Foreground="White" Panel.ZIndex="-2" VerticalAlignment="Center" Background="#FF154FB4" Padding="60,40" FontFamily="Arial Black" FontSize="36" HorizontalAlignment="Center" Visibility="Hidden" Name="InfoDraw">REMIS!</TextBlock>
+        </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <Button Content="Game Restart" Click="RestartGame_Click"/>
-            <StackPanel Grid.Column="1">
-                <TextBlock Grid.Column="1" Foreground="DarkGreen" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18">Wygrana  0</TextBlock>
-                <TextBlock Grid.Column="1" Foreground="DarkRed" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18"> Przegrana  0</TextBlock>
-                <TextBlock Grid.Column="1" Foreground="DarkSlateBlue" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18">Remis  0</TextBlock>
-            </StackPanel>
-        </Grid>
-        <Grid Name="GameArea" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions >
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions >
-            <Button x:Name="Button1" Grid.Column="0" Grid.Row="0" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
-            <Button x:Name="Button2" Grid.Column="1" Grid.Row="0" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
-            <Button x:Name="Button3" Grid.Column="2" Grid.Row="0" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
-            <Button x:Name="Button4" Grid.Column="0" Grid.Row="1" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
-            <Button x:Name="Button5" Grid.Column="1" Grid.Row="1" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
-            <Button x:Name="Button6" Grid.Column="2" Grid.Row="1" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
-            <Button x:Name="Button7" Grid.Column="0" Grid.Row="2" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
-            <Button x:Name="Button8" Grid.Column="1" Grid.Row="2" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
-            <Button x:Name="Button9" Grid.Column="2" Grid.Row="2" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click" />
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Restart" Click="RestartGame_Click" Foreground="White" Background="#ED000000" FontFamily="Arial Black" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Grid.Column="1" Foreground="DarkGreen" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18" Name="ScoreWin"></TextBlock>
+                    <TextBlock Grid.Column="1" Foreground="DarkRed" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18" Name="ScoreDefeat"></TextBlock>
+                    <TextBlock Grid.Column="1" Foreground="DarkSlateBlue" Block.TextAlignment="Center" FontWeight="Bold" FontSize="18" Name="ScoreDraw"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid Name="GameArea" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions >
+                <Button x:Name="Button1" Grid.Column="0" Grid.Row="0" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
+                <Button x:Name="Button2" Grid.Column="1" Grid.Row="0" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
+                <Button x:Name="Button3" Grid.Column="2" Grid.Row="0" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
+                <Button x:Name="Button4" Grid.Column="0" Grid.Row="1" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
+                <Button x:Name="Button5" Grid.Column="1" Grid.Row="1" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
+                <Button x:Name="Button6" Grid.Column="2" Grid.Row="1" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
+                <Button x:Name="Button7" Grid.Column="0" Grid.Row="2" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
+                <Button x:Name="Button8" Grid.Column="1" Grid.Row="2" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click"/>
+                <Button x:Name="Button9" Grid.Column="2" Grid.Row="2" Style="{StaticResource TicTacPlace}" Click="BoardPlace_Click" />
+            </Grid>
         </Grid>
     </Grid>
 </Window>

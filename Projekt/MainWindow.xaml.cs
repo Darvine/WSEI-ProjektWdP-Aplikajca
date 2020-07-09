@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using TicTacToeLib;
@@ -16,12 +17,19 @@ namespace Projekt
 
         private Board GameBoard;
 
+        private Dictionary<GameStates, int> Scores = new Dictionary<GameStates, int>() {
+            { GameStates.Won, 0 },
+            { GameStates.Lost, 0 },
+            { GameStates.Draw, 0 }
+        };
+
         public MainWindow()
         {
             InitializeComponent();
             GameBoard = new Board(3);
             GameBoard.OnSlotValueChange += OnBoardPlaceValueChange;
             GameBoard.OnStateChange += OnGameStateChange;
+            UpdateScores();
         }
 
         private void BoardPlace_Click(object sender, RoutedEventArgs e)
@@ -35,12 +43,35 @@ namespace Projekt
         private void OnBoardPlaceValueChange(object sender, SlotValueChangedEventArgs e)
         {
             GetBoardPlace(e.x, e.y).SetValue(Button.ContentProperty, Translator.BoardSlotValues[e.value]);
+            GetBoardPlace(e.x, e.y).IsEnabled = false;
         }
 
         private void OnGameStateChange(object sender, EventArgs e)
         {
-            if (GameBoard.State != GameStates.InProgress)
-                MessageBox.Show(Translator.GameStates[GameBoard.State]);
+            if (GameBoard.State == GameStates.Won)
+            {
+                InfoWin.Visibility = Visibility.Visible;
+                Scores[GameStates.Won]++; 
+            }
+            else if (GameBoard.State == GameStates.Lost)
+            {
+                InfoDefeat.Visibility = Visibility.Visible;
+                Scores[GameStates.Lost]++;
+            }
+            else if (GameBoard.State == GameStates.Draw)
+            {
+                InfoDraw.Visibility = Visibility.Visible;
+                Scores[GameStates.Draw]++;
+            }
+
+            UpdateScores();
+        }
+
+        private void UpdateScores()
+        {
+            ScoreWin.Text = $"Wygrano {Scores[GameStates.Won]}";
+            ScoreDefeat.Text = $"Przegrano {Scores[GameStates.Lost]}";
+            ScoreDraw.Text = $"Remis {Scores[GameStates.Draw]}";
         }
 
         private FrameworkElement GetBoardPlace(int x, int y)
@@ -59,7 +90,16 @@ namespace Projekt
 
         private void RestartGame_Click(object sender, RoutedEventArgs e)
         {
+            InfoDraw.Visibility = Visibility.Hidden;
+            InfoWin.Visibility = Visibility.Hidden;
+            InfoDefeat.Visibility = Visibility.Hidden;
+
             GameBoard.Clear();
+
+            foreach (FrameworkElement el in GameArea.Children)
+            {
+                el.IsEnabled = true;
+            }
         }
     }
 }
