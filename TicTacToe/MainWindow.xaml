@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="544.149" Width="520.745">
+        Title="TicTacToe" Height="544.149" Width="520.745">
     <Window.Resources>
         <Style x:Key="TicTacPlace" TargetType="Button">
             <Setter Property="Background" Value="White"/>
